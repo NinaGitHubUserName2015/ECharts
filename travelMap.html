@@ -1,0 +1,458 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="main" style="height:400px"></div>
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+    // 使用
+        require(
+                [
+                    'echarts',
+                    'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+                    'echarts/chart/map'
+                ],
+                function (ec) {
+                    var myChart = ec.init(document.getElementById('main'));
+                    option = {
+                    	    backgroundColor: '#1b1b1b',
+                    	    color: ['gold','aqua','lime'],
+                    	    title : {
+                    	        text: 'Srilanka Travel Line 2016',
+                    	        subtext:'Tara and Nina',
+                    	        x:'center',
+                    	        textStyle : {
+                    	            color: '#fff'
+                    	        }
+                    	    },
+                    	    tooltip : {
+                    	        trigger: 'item',
+                    	        formatter: '{b}'
+                    	    },
+                    	    legend: {
+                    	        orient: 'vertical',
+                    	        x:'left',
+                    	        data:['Peking', 'Shenzhen', 'Colombo','Negombo','Sigiriya','Kandy','Nuwara Eliya','Ella','Yala','Unawatuna','Galle'],
+                    	        selectedMode: 'single',
+                    	        selected:{
+                    	            //'Peking->Colombo' : false,
+                    	            //'Colombo' : false
+                    	        },
+                    	        textStyle : {
+                    	            color: '#fff'
+                    	        }
+                    	    },
+                    	    toolbox: {
+                    	        show : true,
+                    	        orient : 'vertical',
+                    	        x: 'right',
+                    	        y: 'center',
+                    	        feature : {
+                    	            mark : {show: true},
+                    	            dataView : {show: true, readOnly: false},
+                    	            restore : {show: true},
+                    	            saveAsImage : {show: true}
+                    	        }
+                    	    },
+                    	    dataRange: {
+                    	        min : 0,
+                    	        max : 100,
+                    	        calculable : true,
+                    	        color: ['#ff3333', 'orange', 'yellow','lime','aqua'],
+                    	        textStyle:{
+                    	            color:'#fff'
+                    	        }
+                    	    },
+                    	    animationDurationUpdate: 2000, // for update animation, like legend selected.
+                    	    series : [
+                    	        {
+                    	            name: 'Peking->Colombo',
+                    	            type: 'map',
+                    	            roam: true,
+                    	            hoverable: false,
+                    	            mapType: 'world',
+                    	            itemStyle:{
+                    	                normal:{
+                    	                    borderColor:'rgba(100,149,237,1)',
+                    	                    borderWidth:0.5,
+                    	                    areaStyle:{
+                    	                        color: '#1b1b1b'
+                    	                    }
+                    	                }
+                    	            },
+                    	            data:[],
+                    	            geoCoord: {
+                    	            	'Peking': [116.4551,40.2539],
+                    	            	'Shenzhen':[114.057868,22.543099],
+                    	            	'Colombo':[79.8612430000,6.9270786000],
+                    	            	'Negombo':[79.8380216000,7.2087984000],
+                    	            	'Sigiriya':[80.7546980000,7.9541085000],
+                    	            	'Kandy':[80.6337262000,7.2905715000],
+                    	            	'Nuwara Eliya':[80.7824012000,6.9543992000],
+                    	            	'Ella':[81.0465530000,6.8666988000],
+                    	            	'Yala':[81.5166670000,6.3666670000],
+                    	            	'Unawatuna':[80.2488596000,6.0174469000],
+                    	            	'Galle':[80.2209773000,6.0535185000]
+                    	            },
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Peking', smoothness:0.2}, {name:'Colombo',value:95}]
+/*                     	                    [{name:'北京', smoothness:0.3}, {name:'广州',value:90}],
+                    	                    [{name:'北京', smoothness:0.4}, {name:'广州',value:80}],
+                    	                    [{name:'北京', smoothness:0.5}, {name:'广州',value:70}],
+                    	                    [{name:'北京', smoothness:0.6}, {name:'广州',value:60}],
+                    	                    [{name:'广州', smoothness:0.2}, {name:'北京',value:50}],
+                    	                    [{name:'广州', smoothness:0.3}, {name:'北京',value:40}],
+                    	                    [{name:'广州', smoothness:0.4}, {name:'北京',value:30}],
+                    	                    [{name:'广州', smoothness:0.5}, {name:'北京',value:20}],
+                    	                    [{name:'广州', smoothness:0.6}, {name:'北京',value:10}] */
+                    	                ]
+                    	            }
+                    	        },
+                    	        {
+                    	            name: 'Colombo->Negombo',
+                    	            type: 'map',
+                    	            mapType: 'world',
+                    	            data:[],
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Colombo', smoothness:0.2}, {name:'Negombo',value:90}]
+                    	                ]
+                    	            }
+                    	        },
+                    	        {
+                    	            name: 'Negombo->Sigiriya',
+                    	            type: 'map',
+                    	            mapType: 'world',
+                    	            data:[],
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Negombo', smoothness:0.2}, {name:'Sigiriya',value:85}]
+                    	                ]
+                    	            }
+                    	        },
+                    	        {
+                    	            name: 'Sigiriya->Kandy',
+                    	            type: 'map',
+                    	            mapType: 'world',
+                    	            data:[],
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Sigiriya', smoothness:0.2}, {name:'Kandy',value:80}]
+                    	                ]
+                    	            }
+                    	        },
+                    	        {
+                    	            name: 'Kandy->Nuwara Eliya',
+                    	            type: 'map',
+                    	            mapType: 'world',
+                    	            data:[],
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Kandy', smoothness:0.2}, {name:'Nuwara Eliya',value:75}]
+                    	                ]
+                    	            }
+                    	        },
+                    	        {
+                    	            name: 'Nuwara Eliya->Ella',
+                    	            type: 'map',
+                    	            mapType: 'world',
+                    	            data:[],
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Nuwara Eliya', smoothness:0.2}, {name:'Ella',value:70}]
+                    	                ]
+                    	            }
+                    	        },
+                    	        {
+                    	            name: 'Ella->Yala',
+                    	            type: 'map',
+                    	            mapType: 'world',
+                    	            data:[],
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Ella', smoothness:0.2}, {name:'Yala',value:65}]
+                    	                ]
+                    	            }
+                    	        },
+                    	        {
+                    	            name: 'Yala->Unawatuna',
+                    	            type: 'map',
+                    	            mapType: 'world',
+                    	            data:[],
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Yala', smoothness:0.2}, {name:'Unawatuna',value:60}]
+                    	                ]
+                    	            }
+                    	        },
+                    	        {
+                    	            name: 'Unawatuna->Galle',
+                    	            type: 'map',
+                    	            mapType: 'world',
+                    	            data:[],
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Unawatuna', smoothness:0.2}, {name:'Galle',value:55}]
+                    	                ]
+                    	            }
+                    	        },
+                    	        {
+                    	            name: 'Galle->Colombo',
+                    	            type: 'map',
+                    	            mapType: 'world',
+                    	            data:[],
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Galle', smoothness:0.2}, {name:'Colombo',value:50}]
+                    	                ]
+                    	            }
+                    	        },
+                    	        {
+                    	            name: 'Colombo->Peking',
+                    	            type: 'map',
+                    	            mapType: 'world',
+                    	            data:[],
+                    	            markLine : {
+                    	                smooth:true,
+                    	                effect : {
+                    	                    show: true,
+                    	                    scaleSize: 1,
+                    	                    period: 30,
+                    	                    color: '#fff',
+                    	                    shadowBlur: 10
+                    	                },
+                    	                itemStyle : {
+                    	                    normal: {
+                    	                        borderWidth:1,
+                    	                        label: {
+                    	                            show: false
+                    	                        },
+                    	                        lineStyle: {
+                    	                            type: 'solid',
+                    	                            shadowBlur: 10
+                    	                        }
+                    	                    }
+                    	                },
+                    	                data : [
+                    	                    [{name:'Colombo', smoothness:0.2}, {name:'Peking',value:45}]
+                    	                ]
+                    	            }
+                    	        }
+                    	    ]
+                    	};
+                    myChart.setOption(option);
+                }
+        );
+</script>
+</body>
+</html>
